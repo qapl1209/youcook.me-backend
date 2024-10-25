@@ -1,1 +1,1 @@
-from db import get_database
+from .database import get_database, init_db, close_db

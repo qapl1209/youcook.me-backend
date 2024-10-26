@@ -3,9 +3,9 @@ from fastapi.responses import Response
 from typing import Optional
 from models import Recipe, RecipeCollection
 from bson import ObjectId
-from db import Database
+from db import get_database
 
-db = Database.get_database()
+db = get_database()
 
 class RecipeCRUD:
     def __init__(self, db):
@@ -57,5 +57,3 @@ class RecipeCRUD:
             return Response(status_code=status.HTTP_204_NO_CONTENT)
         
         raise HTTPException(status_code=404, detail=f"Recipe not found with id={id} ")
-
-recipe_crud = RecipeCRUD(db)

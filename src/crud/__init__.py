@@ -1,1 +1,1 @@
-from src.crud.recipe import recipe_crud
+from .recipe import RecipeCRUD

@@ -1,5 +1,5 @@
-from typing import Optional, Set, List
-from pydantic import ConfigDict, BaseModel, Field
+from typing import Optional, List
+from pydantic import ConfigDict, BaseModel, Field, field_validator
 from pydantic.functional_validators import BeforeValidator
 
 from typing_extensions import Annotated
@@ -24,9 +24,9 @@ class Recipe(BaseModel):
     id: Optional[PyObjectId] = Field(alias="_id", default=None)
     name: str = Field(...)
     preptime: int = Field(...)
-    ingredients: Set[str] = Field(...)
+    ingredients: List[str] = Field(...)
     instructions: str = Field(...)
-    tags: Set[str] = Field(...)
+    tags: List[str] = Field(...)
     model_config = ConfigDict(
         populate_by_name=True,
         arbitrary_types_allowed=True,
@@ -34,12 +34,19 @@ class Recipe(BaseModel):
             "example": {
                 "name": "Fried Rice",
                 "preptime": 4,
-                "ingredients": {"Oil, Rice, Egg"},
+                "ingredients": ["Oil, Rice, Egg"],
                 "instructions": "1. Put the oil and heat in the pan until glistening. \n 2. Cook your scrambled egg in the pan. \n 3. Add your rice and serve when thoroughly mixed.",
-                "tags": {"Vegan, Gluen-free"},
+                "tags": ["Vegan, Gluen-free"],
             }
         }
     )
+
+    # # Converts inputted lists to sets for listed fields
+    # @field_validator("ingredients", "tags", mode="before")
+    # def convert_list_to_set(cls, v) -> Set[str]:
+    #     if isinstance(v, list):
+    #         return set(v)
+    #     return v
 
     def __repr__(self):
         return f"<Recipe(id={self.id}, name={self.name})>"

@@ -1,1 +1,1 @@
-from src.models.recipe import Recipe, RecipeCollection
+from .recipe import Recipe, RecipeCollection

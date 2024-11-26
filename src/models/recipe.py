@@ -34,9 +34,9 @@ class Recipe(BaseModel):
             "example": {
                 "name": "Fried Rice",
                 "preptime": 4,
-                "ingredients": ["Oil, Rice, Egg"],
+                "ingredients": ["Oil", "Rice", "Egg"],
                 "instructions": "1. Put the oil and heat in the pan until glistening. \n 2. Cook your scrambled egg in the pan. \n 3. Add your rice and serve when thoroughly mixed.",
-                "tags": ["Vegan, Gluen-free"],
+                "tags": ["Vegan", "Gluten-free"],
             }
         }
     )
